@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="movieApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Movie App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    </script>
+  </head>
+  <body>
+    <div class="first" ng-controller="MovieController as movies">
+      <h1>Movie List!</h1>
+      <h3>
+        {{movies.movieList.length}}
+        <ng-pluralize
+          count='movies.movieList.length'
+          when="{
+            '1' : 'movie',
+            'other' : 'movies'
+          }">
+        </ng-pluralize>
+        to watch
+      </h3>
+      <ul ng-repeat="movie in movies.movieList | orderBy:'title' |  limitTo : 3">
+        <li>{{movie.title}}<button type="button" name="button" ng-click="movies.deleteMovie(movie)" >X</button></li>
+      </ul>
+      <div>
+        <form ng-submit="movies.submit()">
+          <h3>Add Movie: </h3 />
+            <input type="text" ng-model="movies.text" name="text" />
+          <input type="submit" id="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
